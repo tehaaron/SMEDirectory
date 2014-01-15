@@ -3,11 +3,12 @@
 <head>
 <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="js/app.js"></script>
+<link href="css/styles.css" rel="stylesheet">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
-    <form id="createSME">
+    <form id="sme-submission">
         <ul>
             <li>
                 <label for="firstname">First Name:</label>
@@ -26,10 +27,14 @@
                 <input type="text" id="subject"/>
             </li>
             <li>
-                <input type="submit" value="Save" id="btnSave"/>
+                <input type="submit" value="Save" id="btnSave" class="btn btn-success"/>
             </li>
         </ul>
     </form>
+
+    <div id="list-display">
+
+    </div>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </body>
 </html>
