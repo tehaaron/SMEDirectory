@@ -1,3 +1,24 @@
-form#sme-submission ul {
+body {
+	background-color: #d3d3d3;
+}
+
+ul.no-list-style {
 	list-style: none;
+}
+
+form#sme-submission {
+	display: block;
+	padding:24px;
+	background-color: #fff;
+}
+
+form#sme-submission ul li {
+	padding-top: 6px;
+}
+
+div.sme-entry {
+	width: 75%;
+	padding: 10px;
+	background-color: #fff;
+	margin: 20px 0 0 20px;
 }

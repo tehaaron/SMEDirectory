@@ -20,7 +20,8 @@ var Add = function(){
 		firstname:document.getElementById('firstname').value,
 		lastname:document.getElementById('lastname').value,
 		email:document.getElementById('email').value,
-		subject:document.getElementById('subject').value
+		subject:document.getElementById('subject').value,
+
 	});
 
 	rolodex.push(SME);
@@ -29,7 +30,7 @@ var Add = function(){
 	for (var key in SME) {
 		var person = JSON.parse(SME[key]);
 		var div = document.getElementById('list-display').lastChild;
-		div.innerHTML = div.innerHTML + "<div class='sme-entry'><ul><li>"+person.subject+"</li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul></div>";
+		div.innerHTML = div.innerHTML + "<div class='sme-entry'><ul class='no-list-style'><li><h3>"+person.subject+"<h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul></div>";
 	}
 
 	alert("Saved");
@@ -39,6 +40,6 @@ var List = function(){
 	for (var key in rolodex) {
 		var person = JSON.parse(rolodex[key]);
 		var div = document.getElementById('list-display');
-		div.innerHTML = div.innerHTML + "<div class='sme-entry'><ul><li>"+person.subject+"</li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul></div>";
+		div.innerHTML = div.innerHTML + "<div class='sme-entry'><ul class='no-list-style'><li><h3>"+person.subject+"</h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul></div>";
 	}
 };
