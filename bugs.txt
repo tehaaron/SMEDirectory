@@ -1,0 +1,4 @@
+Bugs
+-------------------------
+
+1/15 - WIP - pretty sure that the Add() function is storing data in localStorage incorrectly because regardless of how much information gets added there is still only 1 key, value pair making it nearly impossible to delete entries 1 by 1.
