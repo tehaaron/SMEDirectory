@@ -17,6 +17,14 @@ window.onload = function() {
 	var btnReset = document.getElementById('btnReset');
 	btnReset.addEventListener('click', list, false);
 
+	var btnClearStorage = document.getElementById('btnClearStorage').addEventListener('click', clearStorage, false);
+
+	list();
+};
+
+var clearStorage = function() {
+	rolodex = [];
+	localStorage.clear();
 	list();
 };
 
