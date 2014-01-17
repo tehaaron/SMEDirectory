@@ -51,7 +51,11 @@ var findByUID = function(uniqueID) { //this function takes an object's uid and f
 	}
 };
 
-var Delete = function(uid) {
-	var index = findByUID(uid);
-	rolodex.splice(index, 1);
+var Delete = function(uid) { //delete the object in rolodex found at the indexOf 
+	if(typeof uid === "string") {
+		var index = findByUID(uid);
+		rolodex.splice(index, 1);
+	} else {
+		console.log("findByUID() only takes strings");
+	}
 };
