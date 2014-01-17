@@ -12,7 +12,7 @@ window.onload = function() {
 	var btnSave = document.getElementById('btnSave'); 
 	btnSave.addEventListener('click', Add, false); //assign button action
 
-	List();
+	list();
 };
 
 var Add = function() { //add an SME with the form
@@ -29,16 +29,17 @@ var Add = function() { //add an SME with the form
 	localStorage.setItem('rolodex', JSON.stringify(rolodex)); //string the array and send to localStorage
 
 	var div = document.getElementById('list-display');
-	div.innerHTML = div.innerHTML + "<div class='sme-entry' id='"+person.uid+"'><ul class='no-list-style'><li><h3>"+person.subject+"<h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul><div class='delete'>X</div></div>";
+	div.innerHTML = div.innerHTML + "<div class=\"sme-entry\" id=\""+person.uid+"\"><ul class=\"no-list-style\"><li><h3>"+person.subject+"<h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul><a href=\"javascript:remove(\'"+person.uid+"\');\" class=\"delete\">X</a></div>";
 
 	alert("Saved"); //alert if it submitted..for testing
 };
 
-var List = function() { //list existing SMEs, used during onLoad
+var list = function() { //list existing SMEs, used during onLoad
+	var div = document.getElementById('list-display');
+	div.innerHTML = "";
 	for (var key in rolodex) {
 		var person = rolodex[key];
-		var div = document.getElementById('list-display');
-		div.innerHTML = div.innerHTML + "<div class='sme-entry' id='"+person.uid+"'><ul class='no-list-style'><li><h3>"+person.subject+"</h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul><div class='delete'>X</div></div>";
+		div.innerHTML = div.innerHTML + "<div class=\"sme-entry\" id=\""+person.uid+"\"><ul class=\"no-list-style\"><li><h3>"+person.subject+"</h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul><a href=\"javascript:remove(\'"+person.uid+"\');\" class=\"delete\">X</a></div>";
 	}
 };
 
@@ -51,10 +52,12 @@ var findByUID = function(uniqueID) { //this function takes an object's uid and f
 	}
 };
 
-var Delete = function(uid) { //delete the object in rolodex found at the indexOf 
+var remove = function(uid) { //delete the object in rolodex found at the indexOf based on uid
 	if(typeof uid === "string") {
 		var index = findByUID(uid);
-		rolodex.splice(index, 1);
+		var removed = rolodex.splice(index, 1); //removed should return what was spliced out of the rolodex
+		localStorage.setItem('rolodex', JSON.stringify(rolodex));
+		list(); //re-render the list
 	} else {
 		console.log("findByUID() only takes strings");
 	}
