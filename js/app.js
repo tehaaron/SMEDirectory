@@ -8,15 +8,9 @@ window.onload = function() {
 	console.log(rolodex);
 	}
 
-	var btnSave = document.getElementById('btnSave'); 
-	btnSave.addEventListener('click', add, false); //assign button action
-
-	var btnSearch = document.getElementById('btnSearch');
-	btnSearch.addEventListener('click', searchKeywords, false);
-
-	var btnReset = document.getElementById('btnReset');
-	btnReset.addEventListener('click', list, false);
-
+	var btnSave = document.getElementById('btnSave').addEventListener('click', add, false); 
+	var btnSearch = document.getElementById('btnSearch').addEventListener('click', searchKeywords, false);
+	var btnReset = document.getElementById('btnReset').addEventListener('click', list, false);
 	var btnClearStorage = document.getElementById('btnClearStorage').addEventListener('click', clearStorage, false);
 
 	list();
