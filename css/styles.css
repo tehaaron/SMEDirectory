@@ -24,6 +24,11 @@ div.sme-entry {
 	position: relative;
 }
 
+form#search-form {
+	display: block;
+	padding: 24px;
+}
+
 .delete {
 	display: block;
 	position: absolute;

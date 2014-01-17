@@ -8,19 +8,25 @@ window.onload = function() {
 	console.log(rolodex);
 	}
 
-
 	var btnSave = document.getElementById('btnSave'); 
-	btnSave.addEventListener('click', Add, false); //assign button action
+	btnSave.addEventListener('click', add, false); //assign button action
+
+	var btnSearch = document.getElementById('btnSearch');
+	btnSearch.addEventListener('click', searchKeywords, false);
+
+	var btnReset = document.getElementById('btnReset');
+	btnReset.addEventListener('click', list, false);
 
 	list();
 };
 
-var Add = function() { //add an SME with the form
+var add = function() { //add an SME with the form
 	var SME = {
 		firstname:document.getElementById('firstname').value,
 		lastname:document.getElementById('lastname').value,
 		email:document.getElementById('email').value,
 		subject:document.getElementById('subject').value,
+		keywords:Array(document.getElementById('subject').value.toLowerCase().split(" ")), //create keywords from the subject line
 		uid:document.getElementById('firstname').value+document.getElementById('lastname').value+Math.floor(Math.random()*10001) //unique ID for future use
 
 	};
@@ -29,9 +35,15 @@ var Add = function() { //add an SME with the form
 	localStorage.setItem('rolodex', JSON.stringify(rolodex)); //string the array and send to localStorage
 
 	var div = document.getElementById('list-display');
-	div.innerHTML = div.innerHTML + "<div class=\"sme-entry\" id=\""+person.uid+"\"><ul class=\"no-list-style\"><li><h3>"+person.subject+"<h3></li><li>"+person.firstname+" "+person.lastname+"</li><li>"+person.email+"</li></ul><a href=\"javascript:remove(\'"+person.uid+"\');\" class=\"delete\">X</a></div>";
+	div.innerHTML = div.innerHTML + "<div class=\"sme-entry\" id=\""+SME.uid+"\"><ul class=\"no-list-style\"><li><h3>"+SME.subject+"<h3></li><li>"+SME.firstname+" "+SME.lastname+"</li><li>"+SME.email+"</li></ul><a href=\"javascript:remove(\'"+SME.uid+"\');\" class=\"delete\">X</a></div>";
 
-	alert("Saved"); //alert if it submitted..for testing
+	document.getElementById('firstname').value = "";
+	document.getElementById('lastname').value = "";
+	document.getElementById('email').value = "";
+	document.getElementById('subject').value = "";
+
+
+	alert("Saved");
 };
 
 var list = function() { //list existing SMEs, used during onLoad
@@ -60,5 +72,17 @@ var remove = function(uid) { //delete the object in rolodex found at the indexOf
 		list(); //re-render the list
 	} else {
 		console.log("findByUID() only takes strings");
+	}
+};
+
+var searchKeywords = function() {
+	var div = document.getElementById('list-display');
+	var search = document.getElementById('search').value;
+	var results = rolodex.map(function(e){return e.firstname}).indexOf(String(search));
+	if (results >= 0) {
+		var obj = rolodex[results];
+		div.innerHTML = "<div class=\"sme-entry\" id=\""+obj.uid+"\"><ul class=\"no-list-style\"><li><h3>"+obj.subject+"</h3></li><li>"+obj.firstname+" "+obj.lastname+"</li><li>"+obj.email+"</li></ul><a href=\"javascript:remove(\'"+obj.uid+"\');\" class=\"delete\">X</a></div>";
+	} else {
+		alert("No results");
 	}
 };
