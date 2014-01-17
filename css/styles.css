@@ -21,4 +21,16 @@ div.sme-entry {
 	padding: 10px;
 	background-color: #fff;
 	margin: 20px 0 0 20px;
+	position: relative;
+}
+
+.delete {
+	display: block;
+	position: absolute;
+	font-size: 24px;
+	color: #d3d3d3;
+	top: 0;
+	right: 5px;
+	padding: 0;
+	margin: 0;
 }
