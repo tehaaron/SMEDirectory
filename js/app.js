@@ -77,7 +77,7 @@ var remove = function(uid) { //delete the object in rolodex found at the indexOf
 	}
 };
 
-var searchKeywords = function() {
+var searchKeywords = function() { //currently this is searching by firstname not keyword
 	var div = document.getElementById('list-display');
 	var search = document.getElementById('search').value;
 	var results = rolodex.map(function(e){return e.firstname}).indexOf(String(search));
