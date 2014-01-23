@@ -28,7 +28,7 @@ var add = function() { //add an SME with the form
 		lastname:document.getElementById('lastname').value,
 		email:document.getElementById('email').value,
 		subject:document.getElementById('subject').value,
-		keywords:Array(document.getElementById('subject').value.toLowerCase().split(" ")), //create keywords from the subject line
+		keywords:document.getElementById('subject').value.toLowerCase().split(" "), //create keywords from the subject line
 		uid:document.getElementById('firstname').value+document.getElementById('lastname').value+Math.floor(Math.random()*10001) //unique ID for future use
 
 	};
@@ -43,9 +43,6 @@ var add = function() { //add an SME with the form
 	document.getElementById('lastname').value = "";
 	document.getElementById('email').value = "";
 	document.getElementById('subject').value = "";
-
-
-	alert("Saved");
 };
 
 var list = function() { //list existing SMEs, used during onLoad
@@ -59,7 +56,7 @@ var list = function() { //list existing SMEs, used during onLoad
 
 var findByUID = function(uniqueID) { //this function takes an object's uid and finds it in the rolodex array and then returns index of the object containing it in the array
 	if(typeof uniqueID === "string") { //make sure you pass a string
-		position = rolodex.map(function(e){return e.uid}).indexOf(uniqueID);
+		position = rolodex.map(function(e){return e.uid;}).indexOf(uniqueID);
 		return position;
 	} else {
 		console.log("findByUID() only takes strings");
@@ -80,11 +77,32 @@ var remove = function(uid) { //delete the object in rolodex found at the indexOf
 var searchKeywords = function() { //currently this is searching by firstname not keyword
 	var div = document.getElementById('list-display');
 	var search = document.getElementById('search').value;
-	var results = rolodex.map(function(e){return e.firstname}).indexOf(String(search));
+	var results = rolodex.map(function(e){
+		return e.lastname;
+	}).indexOf(String(search));
+	alert(results);
 	if (results >= 0) {
 		var obj = rolodex[results];
 		div.innerHTML = "<div class=\"sme-entry\" id=\""+obj.uid+"\"><ul class=\"no-list-style\"><li><h3>"+obj.subject+"</h3></li><li>"+obj.firstname+" "+obj.lastname+"</li><li>"+obj.email+"</li></ul><a href=\"javascript:remove(\'"+obj.uid+"\');\" class=\"delete\">X</a></div>";
 	} else {
 		alert("No results");
 	}
+};
+
+//Need to get newSearch working to replace the above one...WIP
+var newSearch = function() {
+	var div = document.getElementById('list-display');
+	var keyword = document.getElementById('search').value.toLowerCase();
+	var results = function(keyword) {
+		for(var key in rolodex) {
+			var person = rolodex[key].keywords;
+			alert(person.indexOf(keyword) > -1);
+		}
+	};
+//	if (results >= 0) {
+//		var obj = rolodex[results];
+//		div.innerHTML = "<div class=\"sme-entry\" id=\""+obj.uid+"\"><ul class=\"no-list-style\"><li><h3>"+obj.subject+"</h3></li><li>"+obj.firstname+" "+obj.lastname+"</li><li>"+obj.email+"</li></ul><a href=\"javascript:remove(\'"+obj.uid+"\');\" class=\"delete\">X</a></div>";
+//	} else {
+//		alert("No results");
+//	}
 };
